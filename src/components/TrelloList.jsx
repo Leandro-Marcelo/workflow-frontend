@@ -7,7 +7,7 @@ const TrelloList = ({ list }) => {
   /* console.log(`qe trae esto`, list.cards.length);
   console.log(list.cards); */
   return (
-    <div className="bg-[#EBECF0] text-[#172b4d] px-3">
+    <div className="bg-[#EBECF0] text-[#172b4d] px-3 ">
       <ListTitle title={list.title} id={list.id} />
       {list.cards.length > 0 &&
         list.cards.map((card) => {

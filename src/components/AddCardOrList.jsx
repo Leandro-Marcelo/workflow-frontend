@@ -1,69 +1,42 @@
-import React, { useContext, useState } from "react";
-import { APIContext } from "../context/APIContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import AddCard from "./AddCard";
+import AddList from "./AddList";
 
 const AddCardOrList = ({ type, id }) => {
-  const { addCard, addList } = useContext(APIContext);
-
-  const initailForm = {
-    text: "",
-  };
-  const [cardOrListText, setCardOrListText] = useState(initailForm);
-  const [open, setOpen] = useState(true);
-
-  /* Cómo hacer para que cuando quiera escribir y no ponga nada, si cambia de pagina no se le cierre */
-  const handleBlur = () => {
-    if (cardOrListText.text === "") {
-      setOpen(true);
-      return;
-    }
-    /* esto es para que solamente cuando se este interactuando con una lista ya creada, cree una card y resetee el input despues de crearse esa card */
-    if (type) {
-      addCard(cardOrListText.text, id);
-      setCardOrListText(initailForm);
-    }
-    /* si tiene contenido, entonces agregalo */
-    setOpen(true);
-  };
-
-  const handleChange = (e) => {
-    setCardOrListText({
-      ...cardOrListText,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  /* se llamaba: handleAddCardOrList y lo tenía el button de crear card o list. No necesitamos hacer que el button cree una carta cuando ya el blur es capaz de hacerlo*/
-  const handleAddList = () => {
-    /* if (type === true) {
-      // le pasamos el id de esta lista para que sepa donde añadir este nuevo TrelloCard
-      addCard(cardOrListText.text, id);
-    } else {
-      addList(cardOrListText.text);
-    } */
-    addList(cardOrListText.text);
-    setCardOrListText(initailForm);
-    setOpen(true);
-  };
-
   return (
-    /* mx-2 padre */
+    <div className="">
+      {type ? <AddCard type={type} id={id} /> : <AddList />}
+    </div>
+  );
+};
+
+export default AddCardOrList;
+
+/* 
+
+
+return (
+    // mx-2 padre
     <div className="">
       {open ? (
         <div
           className="flex pb-2 backdrop-blur-sm bg-white/30"
           onClick={() => setOpen(false)}
         >
-          <p className="text-[#172b4d] cursor-pointer pr-2">+</p>
+          {type ? (
+            <p className="text-[#172b4d] cursor-pointer pr-2">+</p>
+          ) : (
+            <p className="text-white cursor-pointer pr-2 flex justify-center items-center">
+              +
+            </p>
+          )}
           {type ? (
             <p className="text-[#172b4d] cursor-pointer ">Add a card</p>
           ) : (
-            <p className="text-[#172b4d] cursor-pointer ">Add another list</p>
+            <p className="text-white cursor-pointer ">Add another list</p>
           )}
         </div>
       ) : (
-        /* type ? textare : input */
+        // type ? textare : input
         <div className="pb-2 bg-[#EBECF0] ">
           <div className="mb-2">
             {type ? (
@@ -129,6 +102,18 @@ const AddCardOrList = ({ type, id }) => {
       )}
     </div>
   );
-};
 
-export default AddCardOrList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
