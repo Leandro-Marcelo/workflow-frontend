@@ -6,7 +6,7 @@ const APIContext = createContext();
 
 function APIProvider({ children }) {
   const [apiLists, setApiLists] = useState(mockup);
-  /* console.log(apiLists); */
+  console.log(apiLists);
 
   const addCard = (cardText, listId) => {
     // creamos un id único para el nuevo card
